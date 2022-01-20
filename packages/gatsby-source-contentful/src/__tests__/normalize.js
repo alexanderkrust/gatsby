@@ -94,7 +94,7 @@ describe(`Process contentful data (by name)`, () => {
   })
 
   it(`creates nodes for each asset`, () => {
-    const createNode = jest.fn()
+    const createNode = jest.fn(() => Promise.resolve())
     const createNodeId = jest.fn(id => id)
     const assets = currentSyncData.assets
     assets.forEach(assetItem => {
@@ -105,6 +105,7 @@ describe(`Process contentful data (by name)`, () => {
         defaultLocale,
         locales,
         space,
+        pluginConfig,
       })
     })
     expect(createNode.mock.calls).toMatchSnapshot()
@@ -175,7 +176,7 @@ describe(`Skip existing nodes in warm build`, () => {
   })
 
   it(`creates nodes for each asset`, () => {
-    const createNode = jest.fn()
+    const createNode = jest.fn(() => Promise.resolve())
     const createNodeId = jest.fn(id => id)
     const assets = currentSyncData.assets
     assets.forEach(assetItem => {
@@ -186,6 +187,7 @@ describe(`Skip existing nodes in warm build`, () => {
         defaultLocale,
         locales,
         space,
+        pluginConfig,
       })
     })
     expect(createNode.mock.calls).toMatchSnapshot()
@@ -258,7 +260,7 @@ describe(`Process existing mutated nodes in warm build`, () => {
   })
 
   it(`creates nodes for each asset`, () => {
-    const createNode = jest.fn()
+    const createNode = jest.fn(() => Promise.resolve())
     const createNodeId = jest.fn(id => id)
     const assets = currentSyncData.assets
     assets.forEach(assetItem => {
@@ -269,6 +271,7 @@ describe(`Process existing mutated nodes in warm build`, () => {
         defaultLocale,
         locales,
         space,
+        pluginConfig,
       })
     })
     expect(createNode.mock.calls).toMatchSnapshot()
@@ -334,7 +337,7 @@ describe(`Process contentful data (by id)`, () => {
   })
 
   it(`creates nodes for each asset`, () => {
-    const createNode = jest.fn()
+    const createNode = jest.fn(() => Promise.resolve())
     const createNodeId = jest.fn(id => id)
     const assets = currentSyncData.assets
     assets.forEach(assetItem => {
@@ -345,6 +348,7 @@ describe(`Process contentful data (by id)`, () => {
         defaultLocale,
         locales,
         space,
+        pluginConfig,
       })
     })
     expect(createNode.mock.calls).toMatchSnapshot()
