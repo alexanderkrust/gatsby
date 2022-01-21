@@ -12,7 +12,7 @@ export async function validateEngines(directory: string): Promise<void> {
         GATSBY_OPEN_TRACING_CONFIG_FILE: ``,
       },
       silent: true,
-    }
+    } as any
   )
 
   try {

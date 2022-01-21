@@ -313,10 +313,11 @@ async function validatePluginsOptions(
           (plugin.options as IPluginInfoOptions) || {}
         )
 
-        plugin.options = value
+        plugin.options = value as IPluginInfoOptions
 
         // Handle unknown key warnings
-        const validationWarnings = warning?.details
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const validationWarnings = (warning as any)?.details
 
         if (validationWarnings?.length > 0) {
           reporter.warn(

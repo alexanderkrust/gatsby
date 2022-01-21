@@ -196,6 +196,7 @@ export const renderDevHTML = ({
     } catch {
       // If we can't get the page, it was probably deleted recently
       // so let's just do a 404 page.
+      // eslint-disable-next-line prefer-promise-reject-errors
       return reject(`404 page`)
     }
 

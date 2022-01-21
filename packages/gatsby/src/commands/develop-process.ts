@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { syncStaticDir } from "../utils/get-static-dir"
 import reporter from "gatsby-cli/lib/reporter"
 import telemetry from "gatsby-telemetry"
@@ -72,8 +73,11 @@ onExit(() => {
 })
 
 process.on(`message`, msg => {
-  if (msg.type === `COMMAND` && msg.action.type === `EXIT`) {
-    process.exit(msg.action.payload)
+  if (
+    (msg as any)?.type === `COMMAND` &&
+    (msg as any)?.action.type === `EXIT`
+  ) {
+    process.exit((msg as any)?.action.payload)
   }
 })
 

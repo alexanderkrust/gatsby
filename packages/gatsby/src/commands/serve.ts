@@ -153,7 +153,8 @@ module.exports = async (program: IServeProgram): Promise<void> => {
       express.json(),
       express.raw(),
       async (req, res, next) => {
-        const { "0": pathFragment } = req.params
+        /* const { "0": pathFragment } = req.params */
+        const pathFragment = req.params[0]
 
         // Check first for exact matches.
         let functionObj = functions.find(

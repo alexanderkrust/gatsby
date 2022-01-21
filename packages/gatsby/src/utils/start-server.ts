@@ -278,8 +278,8 @@ export async function startServer(
   })
 
   app.get(`/__open-stack-frame-in-editor`, (req, res) => {
-    const fileName = path.resolve(process.cwd(), req.query.fileName)
-    const lineNumber = parseInt(req.query.lineNumber, 10)
+    const fileName = path.resolve(process.cwd(), (req.query as any).fileName)
+    const lineNumber = parseInt((req.query as any).lineNumber, 10)
     launchEditor(fileName, isNaN(lineNumber) ? 1 : lineNumber)
     res.end()
   })
@@ -413,8 +413,8 @@ export async function startServer(
     }
 
     const moduleId = req?.query?.moduleId
-    const lineNumber = parseInt(req.query.lineNumber, 10)
-    const columnNumber = parseInt(req.query.columnNumber, 10)
+    const lineNumber = parseInt((req.query as any).lineNumber, 10)
+    const columnNumber = parseInt((req.query as any).columnNumber, 10)
 
     let fileModule
     for (const module of compilation.modules) {
@@ -489,15 +489,15 @@ export async function startServer(
     }
 
     const filePath = req?.query?.filePath
-    const lineNumber = parseInt(req.query.lineNumber, 10)
-    const columnNumber = parseInt(req.query.columnNumber, 10)
+    const lineNumber = parseInt((req.query as any).lineNumber, 10)
+    const columnNumber = parseInt((req.query as any).columnNumber, 10)
 
     if (!filePath) {
       res.json(emptyResponse)
       return
     }
 
-    const sourceContent = await fs.readFile(filePath, `utf-8`)
+    const sourceContent = await fs.readFile(filePath as string, `utf-8`)
 
     const codeFrame = codeFrameColumns(
       sourceContent,
@@ -598,7 +598,7 @@ export async function startServer(
         const renderResponse = await renderDevHTML({
           path: pathObj.path,
           page: pathObj,
-          skipSsr: req.query[`skip-ssr`] || false,
+          skipSsr: (req.query[`skip-ssr`] as any) || false,
           store,
           htmlComponentRendererPath: PAGE_RENDERER_PATH,
           directory: program.directory,

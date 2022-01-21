@@ -190,6 +190,7 @@ export const queryExtractionGraphQLError = (
  * @private
  */
 export const queryExtractedBabelSuccess = (
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   { componentPath },
   plugin: IGatsbyPlugin,
   traceId?: string
@@ -255,6 +256,7 @@ export const pageQueryRun = (
 }
 
 export const queryStart = (
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   { path, componentPath, isPage },
   plugin: IGatsbyPlugin,
   traceId?: string
@@ -299,7 +301,7 @@ export const removeStaleJob = (
  */
 export const setSiteConfig = (config?: unknown): ISetSiteConfig => {
   const result = gatsbyConfigSchema.validate(config || {})
-  const normalizedPayload: IGatsbyConfig = result.value
+  const normalizedPayload: IGatsbyConfig = result.value as IGatsbyConfig
 
   if (result.error) {
     const hasUnknownKeys = result.error.details.filter(

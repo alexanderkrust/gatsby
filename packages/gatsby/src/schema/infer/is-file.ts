@@ -73,9 +73,11 @@ const getFilePath = (
 
   const looksLikeFile =
     !path.isAbsolute(relativePath) &&
-    mime.getType(relativePath) !== null &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (mime as any).getType(relativePath) !== null &&
     // FIXME: Do we need all of this?
-    mime.getType(relativePath) !== `application/x-msdownload` &&
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (mime as any).getType(relativePath) !== `application/x-msdownload` &&
     isRelative(relativePath) &&
     isRelativeUrl(relativePath)
 
